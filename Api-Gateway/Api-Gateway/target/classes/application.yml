@@ -1,0 +1,27 @@
+server:
+  port: 9191
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: flightuser-ws
+        uri: lb://flightuser-ws
+        predicates:
+        - Path=/api/v1.0/user/flight/**
+      - id: flightadmin-ws
+        uri: lb://flightadmin-ws
+        predicates:
+        - Path=/api/v1.0/user/flight/**
+  application:
+    name: api-gateway
+           
+          
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
